@@ -1,0 +1,65 @@
+// See https://go.microsoft.com/fwlink/?LinkId=733558
+// for the documentation about the tasks.json format
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"isBackground": true,
+			"problemMatcher": [
+				{
+					"pattern": [
+						{
+							"regexp": "\\b\\B",
+							"file": 1,
+							"location": 2,
+							"message": 3
+						}
+					],
+					"background": {
+						"activeOnStart": true,
+						"beginsPattern": "^.*Scanning for projects...*",
+						"endsPattern": "^.*Quarkus .* started in .*\\. Listening on:*"
+					}
+				}
+			],
+			"group": "build",
+			"label": "quarkus:dev (rest-service)",
+			"command": "./mvnw quarkus:dev ",
+			"windows": {
+				"command": "sdk default java 17.0.1-tem && .\\mvnw.cmd quarkus:dev "
+			},
+			"options": {
+				"cwd": "rest-service"
+			}
+		},
+		{
+			"type": "shell",
+			"isBackground": true,
+			"problemMatcher": [
+				{
+					"pattern": [
+						{
+							"regexp": "\\b\\B",
+							"file": 1,
+							"location": 2,
+							"message": 3
+						}
+					],
+					"background": {
+						"activeOnStart": true
+					}
+				}
+			],
+			"group": "build",
+			"label": "package -Pnative (rest-service)",
+			"command": "./mvnw package -Pnative ",
+			"windows": {
+				"command": ".\\mvnw.cmd package -Pnative "
+			},
+			"options": {
+				"cwd": "rest-service"
+			}
+		}
+	]
+}
